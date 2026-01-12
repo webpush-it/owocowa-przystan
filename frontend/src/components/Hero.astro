@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets'
+import heroBg from '../assets/apples.jpg'
+---
+<section class="relative h-[80vh] w-full flex items-center justify-center overflow-hidden">
+    <Image
+            src={heroBg}
+            alt="Sad Owocowa Przystań"
+            class="absolute inset-0 w-full h-full object-cover"
+            quality="high"
+    />
+
+    <div class="absolute inset-0 bg-black/40"></div>
+
+    <div class="relative z-10 text-center text-white max-w-3xl px-4">
+        <span class="uppercase tracking-widest text-sm mb-4 block text-stone-200">Zagroda Edukacyjna</span>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            Szczerość prosto <br/> z natury
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 font-light text-stone-100">
+            Odkryj smaki wielopokoleniowego sadu w Borownie Kolonii.
+        </p>
+        <div class="flex gap-4 justify-center">
+            <a href="/#oferta" class="bg-[#2F5233] px-8 py-3 rounded text-white font-semibold hover:bg-[#244026] transition">
+                Zobacz warsztaty
+            </a>
+        </div>
+    </div>
+</section>
