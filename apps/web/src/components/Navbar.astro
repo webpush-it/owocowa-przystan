@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets'
+import logo from '../assets/owocowa-przystan-logo.png'
+const links = [
+    { name: 'O nas', href: '/#o-nas' },
+    { name: 'Oferta', href: '/oferta' },
+    { name: 'Galeria', href: '/galeria' },
+    { name: 'Kontakt', href: '/kontakt' },
+]
+---
+
+<nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-op-green/20">
+    <div class="container mx-auto px-8 h-26 flex justify-between items-center py-2">
+        <a href="/" class="flex items-center gap-2 group">
+            <Image src={logo} alt="Owocowa Przystań Logo" class="h-24 w-auto object-contain" />
+        </a>
+
+        <ul class="hidden md:flex gap-8">
+            {links.map(link => (
+                <li>
+                    <a href={link.href} class="text-op-brown hover:text-op-red font-medium transition-colors">
+                        {link.name}
+                    </a>
+                </li>
+            ))}
+        </ul>
+
+        <button id="menu-toggle" class="md:hidden text-op-green-dark p-2 focus:outline-none" aria-label="Menu">
+            <svg id="icon-open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 transition-transform duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 hidden transition-transform duration-300 rotate-90">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-op-green/20 shadow-xl">
+        <ul class="flex flex-col p-6 gap-4 text-center">
+            {links.map(link => (
+                <li>
+                    <a
+                        href={link.href}
+                        class="mobile-link block text-lg text-op-brown font-medium hover:text-op-red py-2 border-b border-gray-50 last:border-0"
+                    >
+                        {link.name}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </div>
+</nav>
+
+<script>
+    // Pobieramy elementy po ID
+    const menuBtn = document.getElementById('menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const iconOpen = document.getElementById('icon-open');
+    const iconClose = document.getElementById('icon-close');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    // Funkcja przełączająca menu
+    function toggleMenu() {
+        const isClosed = mobileMenu.classList.contains('hidden');
+
+        if (isClosed) {
+            // Otwórz
+            mobileMenu.classList.remove('hidden');
+            iconOpen.classList.add('hidden');
+            iconClose.classList.remove('hidden');
+            iconClose.classList.remove('rotate-90'); // Animacja obrotu X
+        } else {
+            // Zamknij
+            mobileMenu.classList.add('hidden');
+            iconOpen.classList.remove('hidden');
+            iconClose.classList.add('hidden');
+            iconClose.classList.add('rotate-90');
+        }
+    }
+
+    // Obsługa kliknięcia w przycisk
+    menuBtn?.addEventListener('click', toggleMenu);
+
+    // Zamknij menu po kliknięciu w którykolwiek link (ważne przy nawigacji na tej samej stronie)
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+             // Wymuś zamknięcie
+             mobileMenu.classList.add('hidden');
+             iconOpen.classList.remove('hidden');
+             iconClose.classList.add('hidden');
+        });
+    });
+</script>

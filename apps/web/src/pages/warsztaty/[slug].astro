@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { sanityClient, urlFor } from '../../lib/sanity'
+
+export async function getStaticPaths() {
+    const query = `*[_type == "workshop"]{ "slug": slug.current }`
+    const workshops = await sanityClient.fetch(query)
+
+    // Obsługa przypadku bez danych w CMS (dla demo)
+    if (!workshops.length) {
+        return [{ params: { slug: 'w-poszukiwaniu-owadow' } }]
+    }
+
+    return workshops.map((workshop: any) => ({
+        params: { slug: workshop.slug },
+    }))
+}
+
+const { slug } = Astro.params
+
+// Pobranie pełnych danych
+const query = `*[_type == "workshop" && slug.current == $slug][0]`
+let workshop = await sanityClient.fetch(query, { slug })
+
+// Mock data jeśli brak w CMS
+if (!workshop && slug === 'w-poszukiwaniu-owadow') {
+    workshop = {
+        title: "W poszukiwaniu owadów pożytecznych",
+        duration: "Min. 2h",
+        targetGroup: "Dzieci klas 1-3, 4-8",
+        groupSize: "min. 15, max. 30",
+        leader: "Szymon Wierus – sadownik",
+        description: "Szczegółowy opis z promptu...",
+        schedule: [
+            "Powitanie uczestników",
+            "Omówienie zasad zachowania",
+            "Wyjście do sadu i rozpoznawanie drzew",
+            "Poszukiwanie i rozmowa o owadach",
+            "Budowa domków dla owadów",
+            "Rozdanie dyplomów i pożegnanie"
+        ],
+        equipment: "Lupa, autorski zestaw do budowy domków"
+    }
+}
+---
+
+<Layout title={workshop.title}>
+    <div class="container mx-auto px-4 py-12 max-w-4xl">
+        <a href="/oferta" class="inline-flex items-center text-op-green-dark hover:text-op-red mb-6 transition">
+            ← Powrót do oferty
+        </a>
+
+        <h1 class="font-serif text-4xl md:text-5xl font-bold text-op-brown mb-6">{workshop.title}</h1>
+
+        {workshop?.mainImage && (
+            <img
+                src={urlFor(workshop.mainImage).width(1200).height(600).url()}
+                alt={workshop.title}
+                class="w-full h-auto rounded-2xl shadow-lg mb-12"
+            />
+        )}
+
+        <div class="grid md:grid-cols-3 gap-8 mb-12">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 col-span-2">
+                <h2 class="font-bold text-xl mb-4 text-op-green-dark">O zajęciach</h2>
+                <p class="text-gray-700 leading-relaxed mb-6">{workshop.description}</p>
+
+                <h3 class="font-bold text-lg mb-3">Harmonogram:</h3>
+                <ul class="list-none space-y-2">
+                    {workshop.schedule && workshop.schedule.map((item: string, index: number) => (
+                        <li class="flex gap-3 text-gray-700">
+                            <span class="text-op-red font-bold">{index + 1}.</span>
+                            {item}
+                        </li>
+                    ))}
+                </ul>
+
+                <h3 class="font-bold text-lg mb-3">Dodatkowe informacje:</h3>
+                <p class="text-gray-700 leading-relaxed mb-6">{workshop.additionalInfo}</p>
+            </div>
+
+            <div class="space-y-6">
+                <div class="bg-op-cream p-6 rounded-xl border border-op-green/30">
+                    <h3 class="font-bold text-lg mb-4 border-b border-gray-200 pb-2">Szczegóły logistyczne</h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><strong>Czas:</strong> {workshop.duration}</li>
+                        <li><strong>Grupa:</strong> {workshop.targetGroup}</li>
+                        <li><strong>Liczebność:</strong> {workshop.groupSize}</li>
+                        <li><strong>Prowadzący:</strong> {workshop.leader || "Szymon Wierus"}</li>
+                        <li><strong>Pomoce:</strong> {workshop.equipment}</li>
+                    </ul>
+                </div>
+
+                <div class="bg-op-red text-white p-6 rounded-xl text-center">
+                    <h3 class="font-bold text-lg mb-2">Zarezerwuj termin</h3>
+                    <p class="text-sm mb-4 opacity-90">Zadzwoń lub napisz, aby ustalić szczegóły.</p>
+                    <a href="/kontakt" class="inline-block bg-white text-op-red px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition w-full">
+                        Kontakt
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</Layout>

@@ -1,0 +1,48 @@
+---
+import { urlFor } from '../lib/sanity'
+
+interface Props {
+    title: string
+    description: string
+    duration: string
+    targetGroup: string
+    mainImage?: any
+    slug: string
+}
+
+const { title, description, duration, targetGroup, mainImage, slug } = Astro.props
+---
+
+<article class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow border border-gray-100 flex flex-col h-full">
+    <div class="h-48 overflow-hidden bg-gray-100 relative">
+        {mainImage ? (
+                <img
+                        src={urlFor(mainImage).width(600).height(400).url()}
+                        alt={title}
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+        ) : (
+                <div class="w-full h-full flex items-center justify-center bg-op-green/20 text-op-green-dark">
+                    <span class="text-4xl">🍎</span>
+                </div>
+        )}
+        <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-op-red shadow-sm">
+            {duration}
+        </div>
+    </div>
+
+    <div class="p-6 flex flex-col flex-grow">
+        <div class="mb-4">
+            <span class="text-xs uppercase tracking-wider text-op-green-dark font-semibold">Dla: {targetGroup}</span>
+            <h3 class="font-serif text-2xl font-bold mt-2 text-gray-800">{title}</h3>
+        </div>
+
+        <p class="text-gray-600 text-sm line-clamp-3 mb-6 flex-grow">
+            {description}
+        </p>
+
+        <a href={`/warsztaty/${slug}`} class="mt-auto w-full text-center py-3 rounded-lg border-2 border-op-green text-op-green-dark font-semibold hover:bg-op-green hover:text-white transition-colors">
+            Zobacz szczegóły
+        </a>
+    </div>
+</article>

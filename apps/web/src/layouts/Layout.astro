@@ -1,0 +1,32 @@
+---
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import '@fontsource/merriweather'
+import '@fontsource/inter'
+
+interface Props {
+    title: string
+    description?: string
+}
+
+const { title, description = "Gospodarstwo sadowniczo-edukacyjne Owocowa Przystań. Warsztaty dla dzieci, natura i ekologia." } = Astro.props
+---
+
+<!doctype html>
+<html lang="pl" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title} | Owocowa Przystań</title>
+    </head>
+    <body class="bg-op-cream text-op-brown font-sans antialiased selection:bg-op-red selection:text-white">
+        <Navbar />
+        <main class="min-h-screen pt-20">
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>

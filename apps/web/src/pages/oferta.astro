@@ -1,0 +1,57 @@
+---
+import Layout from '../layouts/Layout.astro'
+import WorkshopCard from '../components/WorkshopCard.astro'
+import { sanityClient } from '../lib/sanity'
+
+// Zapytanie do CMS
+const query = `*[_type == "workshop"] {
+  title,
+  "slug": slug.current,
+  mainImage,
+  duration,
+  targetGroup,
+  description
+}`
+
+let workshops = []
+
+try {
+    workshops = await sanityClient.fetch(query)
+} catch (error) {
+    console.error("Błąd połączenia z Sanity (spodziewane jeśli nie skonfigurowane)", error)
+}
+
+// Fallback DATA (gdy baza pusta lub błąd) - dane z Twojego promptu
+if (workshops.length === 0) {
+    workshops = [
+        {
+            title: "W poszukiwaniu owadów pożytecznych",
+            slug: "w-poszukiwaniu-owadow",
+            duration: "Min. 2h",
+            targetGroup: "Dzieci klas 1-3, 4-8",
+            description: "Zapoznanie z tematyką życia owadów pożytecznych i ich rolą w ekosystemie. Zajęcia praktyczne w sadzie, budowa domków dla owadów i nauka rozpoznawania gatunków drzew.",
+            // Tutaj można dodać mock obrazka
+        }
+    ]
+}
+---
+
+<Layout title="Oferta Edukacyjna">
+    <div class="bg-op-green/10 py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-op-brown mb-4">Nasze Warsztaty</h1>
+            <p class="text-lg text-gray-700 max-w-2xl mx-auto">
+                Zapraszamy grupy szkolne i przedszkolne na niezapomniane lekcje przyrody w terenie.
+                Zajęcia polecane w terminach: kwiecień, maj, czerwiec.
+            </p>
+        </div>
+    </div>
+
+    <section class="container mx-auto px-4 py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {workshops.map(workshop => (
+                <WorkshopCard {...workshop} />
+            ))}
+        </div>
+    </section>
+</Layout>

@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro'
+import { sanityClient, urlFor } from '../lib/sanity'
+
+// Pobieranie zdjęć z Sanity
+const query = `*[_type == "gallery"] | order(_createdAt desc)`
+let images = []
+
+try {
+    images = await sanityClient.fetch(query)
+} catch (e) {
+    console.error("Błąd pobierania galerii", e)
+}
+
+// Dane demonstracyjne (jeśli Sanity jest puste)
+const fallbackImages = [
+    { title: "Kwitnące jabłonie", category: "sad", url: "https://images.unsplash.com/photo-1523712999610-f77fbcfc3843?q=80&w=800" },
+    { title: "Dzieci budujące domki", category: "warsztaty", url: "https://images.unsplash.com/photo-1505554696434-75096104a1c7?q=80&w=800" },
+    { title: "Nasze pszczoły", category: "przyroda", url: "https://images.unsplash.com/photo-1581442116035-77983634032f?q=80&w=800" },
+    { title: "Jesienne zbiory", category: "sad", url: "https://images.unsplash.com/photo-1567306226416-28f0efdc88ce?q=80&w=800" },
+    { title: "Lekcja przyrody w terenie", category: "warsztaty", url: "https://images.unsplash.com/photo-1414115019757-a8e0b2931383?q=80&w=800" },
+    { title: "Sad jesienią", category: "sad", url: "https://images.unsplash.com/photo-1508604396844-6ee50304323c?q=80&w=800" },
+]
+
+const displayImages = images.length > 0 ? images : fallbackImages
+---
+
+<Layout title="Galeria - Nasz Sad i Warsztaty">
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-op-brown mb-4">Galeria Przystani</h1>
+                <p class="text-gray-600">Zobacz, jak wyglądają nasze codzienne przygody w sadzie, warsztaty edukacyjne i piękno natury, które nas otacza.</p>
+            </div>
+
+            <div class="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
+                {displayImages.map((img: any) => (
+                        <div class="break-inside-avoid group relative overflow-hidden rounded-2xl cursor-pointer bg-op-cream shadow-sm hover:shadow-xl transition-all duration-300">
+                            <img
+                                    src={img.image ? urlFor(img.image).width(800).url() : img.url}
+                                    alt={img.title}
+                                    class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
+                                    loading="lazy"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                                <span class="text-op-green text-xs font-bold uppercase tracking-widest mb-1">{img.category}</span>
+                                <p class="text-white font-serif text-lg">{img.title}</p>
+                            </div>
+                        </div>
+                ))}
+            </div>
+
+            <div class="mt-20 bg-op-cream rounded-3xl p-8 md:p-12 text-center border-2 border-dashed border-op-green/30">
+                <h2 class="font-serif text-2xl md:text-3xl font-bold mb-4">Chcesz zobaczyć więcej?</h2>
+                <p class="text-gray-600 mb-8 max-w-xl mx-auto">Śledź nas na bieżąco w mediach społecznościowych, gdzie publikujemy najświeższe zdjęcia z życia Owocowej Przystani.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="https://www.instagram.com/owocowaprzystan/" target="_blank" class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-500 text-white rounded-full font-bold shadow-lg hover:scale-105 transition">
+                        Instagram
+                    </a>
+                    <a href="https://www.facebook.com/owocowaprzystan/" target="_blank" class="px-8 py-3 bg-blue-600 text-white rounded-full font-bold shadow-lg hover:scale-105 transition">
+                        Facebook
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    /* Opcjonalny efekt Masonry dla nowszych przeglądarek */
+    @supports (grid-template-rows: masonry) {
+        .columns-1 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-rows: masonry;
+        }
+    }
+</style>

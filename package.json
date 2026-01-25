@@ -1,0 +1,20 @@
+{
+  "name": "owocowa-przystan-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n \"studio,web\" -c \"cyan,magenta\" \"npm run dev -w studio\" \"npm run dev -w web\"",
+    "build": "npm run build --workspaces"
+  },
+  "dependencies": {
+    "@sanity/astro": "^3.2.11",
+    "@sanity/client": "^7.14.1",
+    "astro": "^5.16.15"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
