@@ -37,7 +37,7 @@ if (workshops.length === 0) {
 ---
 
 <Layout title="Oferta Edukacyjna">
-    <div class="bg-op-green/10 py-16">
+    <div class="bg-op-green/10 py-8 md:py-16">
         <div class="container mx-auto px-4 text-center">
             <h1 class="font-serif text-4xl md:text-5xl font-bold text-op-brown mb-4">Nasze Warsztaty</h1>
             <p class="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -47,7 +47,7 @@ if (workshops.length === 0) {
         </div>
     </div>
 
-    <section class="container mx-auto px-4 py-16">
+    <section class="container mx-auto px-4 py-8 md:py-16">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {workshops.map(workshop => (
                 <WorkshopCard {...workshop} />
