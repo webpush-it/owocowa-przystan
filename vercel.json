@@ -1,0 +1,10 @@
+{
+  "builds": [
+    {
+      "src": "apps/web/package.json",
+      "use": "@vercel/astro"
+    }
+  ],
+  "devCommand": "npm run dev --prefix apps/web",
+  "installCommand": "npm install"
+}
