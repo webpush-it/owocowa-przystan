@@ -5,6 +5,7 @@ import sanity from '@sanity/astro'
 import vercel from '@astrojs/vercel'
 
 export default defineConfig({
+    output: 'server',
     adapter: vercel(),
     integrations: [
         tailwind(),
