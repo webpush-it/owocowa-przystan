@@ -1,4 +1,4 @@
 {
-  "devCommand": "npm run dev --prefix apps/web",
+  "devCommand": "npm run start --prefix apps/web",
   "installCommand": "npm install"
 }
