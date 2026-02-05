@@ -1,4 +1,0 @@
-{
-  "devCommand": "npm run start --prefix apps/web",
-  "installCommand": "npm install"
-}
