@@ -8,7 +8,9 @@
   "scripts": {
     "start": "concurrently -n \"studio,web\" -c \"cyan,magenta\" \"npm run dev -w studio\" \"vercel dev\"",
     "build": "npm run build --workspaces",
-    "deploy": "vercel deploy --prod"
+    "deploy": "vercel deploy --prod",
+    "deploy:web": "vercel deploy --prod",
+    "deploy:studio": "npm run deploy -w studio"
   },
   "dependencies": {
     "@sanity/astro": "^3.2.11",
