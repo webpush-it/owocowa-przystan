@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sanityClient, urlFor } from '../../lib/sanity';
+
+// Pobieramy posty + mały fragment tekstu (excerpt) jeśli istnieje, lub generujemy go z body
+const posts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt desc) {
+  title,
+  slug,
+  publishedAt,
+  mainImage,
+  "excerpt": array::join(string::split((pt::text(body)), "")[0..150], "") + "..."
+}`);
+---
+
+<Layout title="Blog - Owocowa Przystań">
+    <section class="py-16 bg-stone-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-bold text-green-800 mb-4 font-serif">
+                    Nasze Aktualności
+                </h1>
+                <p class="text-lg text-stone-600 max-w-2xl mx-auto">
+                    Porady ogrodnicze, nowości z sadu i przepisy na przetwory.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {posts.map((post) => (
+                        <article class="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden border border-stone-100 flex flex-col h-full">
+                            <a href={`/blog/${post.slug.current}`} class="block overflow-hidden h-48 group">
+                                {post.mainImage ? (
+                                        <img
+                                                src={urlFor(post.mainImage).width(600).height(400).url()}
+                                                alt={post.title}
+                                                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                                        />
+                                ) : (
+                                        <div class="w-full h-full bg-green-100 flex items-center justify-center text-green-800">
+                                            <span class="text-4xl">🍎</span>
+                                        </div>
+                                )}
+                            </a>
+
+                            <div class="p-6 flex flex-col flex-grow">
+                                <div class="text-sm text-green-600 font-semibold mb-2">
+                                    {new Date(post.publishedAt).toLocaleDateString('pl-PL', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    })}
+                                </div>
+
+                                <h2 class="text-xl font-bold text-gray-800 mb-3 leading-tight hover:text-green-700 transition-colors">
+                                    <a href={`/blog/${post.slug.current}`}>
+                                        {post.title}
+                                    </a>
+                                </h2>
+
+                                <p class="text-stone-600 text-sm line-clamp-3 mb-4 flex-grow">
+                                    {post.excerpt}
+                                </p>
+
+                                <a href={`/blog/${post.slug.current}`} class="inline-flex items-center text-green-700 font-medium hover:underline mt-auto">
+                                    Czytaj dalej
+                                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                                </a>
+                            </div>
+                        </article>
+                ))}
+            </div>
+
+        </div>
+    </section>
+</Layout>

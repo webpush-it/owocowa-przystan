@@ -21,6 +21,7 @@
     "@sanity/image-url": "^1.0.0",
     "@tailwindcss/typography": "^0.5.19",
     "astro": "^5.0.0",
+    "astro-portabletext": "^0.13.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sanity": "^3.0.0",
