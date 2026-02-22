@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { sanityClient, urlFor } from '../../lib/sanity';
+
+// Pobieramy tylko owoce
+const fruits = await sanityClient.fetch(`*[_type == "fruit"] | order(title asc) {
+  title,
+  description,
+  season,
+  varieties,
+  image
+}`);
+---
+
+<Layout title="Oferta Sadownicza - Owoce prosto z drzewa">
+
+    <header class="bg-green-900 text-stone-50 py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10 text-center">
+            <span class="text-green-300 uppercase tracking-widest font-bold text-sm mb-4 block">Naturalne zbiory</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6">Prosto z Sadu</h1>
+            <p class="text-xl max-w-2xl mx-auto text-green-100 opacity-90">
+                Soczyste, chrupiące i pełne witamin. Poznaj owoce, które uprawiamy z pasją od pokoleń.
+                Sprawdź, co aktualnie jest w sezonie.
+            </p>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 py-8 md:py-16">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {fruits.map((fruit: any) => (
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col h-full border border-stone-100">
+
+                        <div class="relative h-72 overflow-hidden">
+                            {fruit.image ? (
+                                    <img
+                                            src={urlFor(fruit.image).width(800).height(600).url()}
+                                            alt={fruit.title}
+                                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                                    />
+                            ) : (
+                                    <div class="w-full h-full bg-green-100 flex items-center justify-center text-4xl">🍎</div>
+                            )}
+
+                            {/* Badge Sezonu */}
+                            {fruit.season && (
+                                    <div class="absolute top-4 left-4 bg-white/95 backdrop-blur shadow-md text-green-800 px-4 py-1.5 rounded-full text-sm font-bold border border-green-100 flex items-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                        {fruit.season}
+                                    </div>
+                            )}
+                        </div>
+
+                        <div class="p-8 flex flex-col flex-grow">
+                            <h2 class="text-3xl font-serif font-bold text-stone-800 mb-4 group-hover:text-green-700 transition-colors">
+                                {fruit.title}
+                            </h2>
+
+                            <p class="text-stone-600 mb-6 leading-relaxed flex-grow">
+                                {fruit.description}
+                            </p>
+
+                            {fruit.varieties && fruit.varieties.length > 0 && (
+                                    <div class="mt-auto pt-6 border-t border-stone-100">
+              <span class="block text-xs font-bold text-stone-400 uppercase tracking-wide mb-3">
+                Dostępne odmiany:
+              </span>
+                                        <div class="flex flex-wrap gap-2">
+                                            {fruit.varieties.map((variety: string) => (
+                                                    <span class="bg-stone-50 border border-stone-200 text-stone-700 text-sm px-3 py-1 rounded-lg">
+                    {variety}
+                  </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                            )}
+                        </div>
+
+                    </article>
+            ))}
+        </div>
+
+        <div class="mt-20 text-center">
+            <h3 class="text-2xl font-serif font-bold text-stone-800 mb-4">Chcesz zamówić większą ilość?</h3>
+            <a href="/kontakt" class="inline-flex items-center justify-center px-8 py-3 bg-green-700 text-white font-bold rounded-full hover:bg-green-800 transition-colors shadow-lg hover:shadow-green-900/20">
+                Skontaktuj się z nami
+            </a>
+        </div>
+
+    </section>
+</Layout>

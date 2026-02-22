@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import WorkshopCard from '../components/WorkshopCard.astro'
-import { sanityClient } from '../lib/sanity'
+import Layout from '../../layouts/Layout.astro'
+import WorkshopCard from '../../components/WorkshopCard.astro'
+import { sanityClient } from '../../lib/sanity'
 
 // Zapytanie do CMS
 const query = `*[_type == "workshop"] {
@@ -37,15 +37,16 @@ if (workshops.length === 0) {
 ---
 
 <Layout title="Oferta Edukacyjna">
-    <div class="bg-op-green/10 py-8 md:py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="font-serif text-4xl md:text-5xl font-bold text-op-brown mb-4">Nasze Warsztaty</h1>
-            <p class="text-lg text-gray-700 max-w-2xl mx-auto">
-                Zapraszamy grupy szkolne i przedszkolne na niezapomniane lekcje przyrody w terenie.
-                Zajęcia polecane w terminach: kwiecień, maj, czerwiec.
+    <header class="bg-orange-50 text-stone-800 py-16 md:py-24 text-center">
+        <div class="container mx-auto px-4">
+            <span class="text-orange-600 uppercase tracking-widest font-bold text-sm mb-4 block">Edukacja i Zabawa</span>
+            <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6 text-stone-800">Warsztaty edukacyjne</h1>
+            <p class="text-xl max-w-2xl mx-auto text-stone-600">
+                Zapraszamy szkoły, przedszkola i rodziny. Zobacz, jak wygląda życie na wsi od kuchni.
+                Nauka przez doświadczanie!
             </p>
         </div>
-    </div>
+    </header>
 
     <section class="container mx-auto px-4 py-8 md:py-16">
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
