@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import heroImg from '../assets/apples.jpg'
+import heroImg from '../assets/sad_glowne.jpg'
 import workshopImg from '../assets/sad_zajecia.jpg'
 import workshop2Img from '../assets/sad_zajecia2.jpg'
 import { sanityClient, urlFor } from '../lib/sanity';
@@ -9,9 +9,9 @@ import Layout from '../layouts/Layout.astro'
 
 // Przykładowe dane "statyczne" do szybkiego startu, zanim backend zostanie uzupełniony
 const features = [
-    { title: "Edukacja", desc: "Warsztaty przyrodnicze dla szkół i przedszkoli.", icon: "📚" },
-    { title: "Natura", desc: "Bezpośredni kontakt z przyrodą i życiem sadu.", icon: "🌳" },
-    { title: "Tradycja", desc: "Poznanie pracy sadownika i cyklu pór roku.", icon: "🍎" },
+    { title: "Edukacja", desc: "Warsztaty przyrodnicze dla dzieci i dorosłych", icon: "📚" },
+    { title: "Natura", desc: "Tutaj dzieje się magia! Cisza, spokój i oddanie.", icon: "🌳" },
+    { title: "Tradycja", desc: "Od 1945 roku z pasją, szczerością i zaangażowaniem", icon: "🍎" },
 ]
 
 // Pobieramy tylko 3 najnowsze posty
@@ -37,10 +37,10 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="/oferta/sady" class="px-8 py-3 bg-green-600 text-white rounded-full font-bold hover:bg-green-700 transition shadow-lg">
-                    Zobacz owoce z sadu
+                    Oferta prosto z sadu
                 </a>
                 <a href="/oferta/warsztaty" class="px-8 py-3 bg-white text-op-brown rounded-full font-bold hover:bg-gray-200 transition shadow-lg">
-                    Oferta warsztatów
+                    Oferta edukacyjna
                 </a>
             </div>
         </div>
@@ -51,12 +51,7 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
             <div class="space-y-6">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-op-brown">Witaj w naszym sadzie</h2>
                 <p class="text-gray-600 leading-relaxed">
-                    Jesteśmy gospodarstwem sadowniczo-edukacyjnym, które powstało z pasji do natury i chęci dzielenia się wiedzą.
-                    Naszą misją jest pokazanie najmłodszym, że współpraca z naturą to klucz do zdrowia – zarówno naszego, jak i ekosystemu.
-                </p>
-                <p class="text-gray-600 leading-relaxed">
-                    Prowadzimy zajęcia, podczas których dzieci nie tylko słuchają, ale dotykają, wąchają i budują.
-                    Naszym przewodnikiem jest <strong>Szymon Wierus</strong> – sadownik z powołania.
+                    Jesteśmy gospodarstwem sadowniczym, gdzie z wiedzą trzech pokoleń sadowników, od 1945 roku nieprzerwanie z pasją i zaangażowaniem zajmujemy się produkcją owoców. Tradycja sadownicza rodziny Wierus trwa... ale chcąc dać Wam jeszcze więcej niż tylko owoce w 2018 roku powstaje nasza własna marka - Owocowa Przystań. Gospodarstwo sadownicze staje się również gospodarstwem edukacyjnym, a marzenie o stworzeniu miejsca przyjaznego dzieciom, gdzie mogłyby z radością i swobodą uczyć się poprzez zabawę i praktykę urzeczywistnia się. Chcemy aby to miejsce było inspiracją nie tylko dla dzieci, ale też dorosłych.
                 </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
@@ -86,7 +81,7 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
             <div class="flex justify-between items-end mb-12">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-800 mb-2">
-                        Co słychać w sadzie?
+                        Najnowsze wieści z naszego gospodarstwa
                     </h2>
                     <p class="text-stone-500">Najnowsze wieści z naszej plantacji.</p>
                 </div>

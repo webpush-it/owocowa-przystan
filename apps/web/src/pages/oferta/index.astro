@@ -1,4 +1,6 @@
 ---
+import ofertaSadyImg from '../../assets/apples.jpg'
+import ofertaEdukacyjnaImg from '../../assets/sad_glowne.jpg'
 import Layout from '../../layouts/Layout.astro';
 ---
 
@@ -15,12 +17,12 @@ import Layout from '../../layouts/Layout.astro';
 
                 <a href="/oferta/sady" class="group relative h-96 rounded-3xl overflow-hidden shadow-xl">
                     <div class="absolute inset-0 bg-green-900">
-                        <img src="https://images.unsplash.com/photo-1569842035659-c290c006509a?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Sady" />
+                        <img src={ofertaSadyImg.src} class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Sady" />
                     </div>
                     <div class="absolute inset-0 flex flex-col justify-end p-10">
-                        <h2 class="text-4xl font-serif font-bold text-white mb-2 group-hover:translate-x-2 transition-transform">Owoce z Sadu</h2>
-                        <p class="text-green-100 text-lg opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">
-                            Sprawdź nasze odmiany jabłek, gruszek i wiśni. Naturalne uprawy.
+                        <h2 class="text-4xl font-serif font-bold text-white mb-2 transition-transform">Owoce prosto z sadu</h2>
+                        <p class="text-green-100 text-lg opacity-0 group-hover:opacity-100 transition-opacity transform duration-300">
+                            Sprawdź odmiany naszych owoców.
                         </p>
                         <span class="mt-6 inline-flex bg-white text-green-900 px-6 py-2 rounded-full font-bold w-max">Przejdź do owoców →</span>
                     </div>
@@ -28,12 +30,12 @@ import Layout from '../../layouts/Layout.astro';
 
                 <a href="/oferta/warsztaty" class="group relative h-96 rounded-3xl overflow-hidden shadow-xl">
                     <div class="absolute inset-0 bg-orange-900">
-                        <img src="https://images.unsplash.com/photo-1503913707736-25f02c914e62?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Edukacja" />
+                        <img src={ofertaEdukacyjnaImg.src} class="w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-700" alt="Edukacja" />
                     </div>
                     <div class="absolute inset-0 flex flex-col justify-end p-10">
-                        <h2 class="text-4xl font-serif font-bold text-white mb-2 group-hover:translate-x-2 transition-transform">Warsztaty</h2>
-                        <p class="text-orange-100 text-lg opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0 duration-300">
-                            Edukacja dla szkół i rodzin. Zobacz życie na wsi.
+                        <h2 class="text-4xl font-serif font-bold text-white mb-2 transition-transform">Warsztaty edukacyjne</h2>
+                        <p class="text-orange-100 text-lg opacity-0 group-hover:opacity-100 transition-opacity transform duration-300">
+                            Zobacz życie na wsi.
                         </p>
                         <span class="mt-6 inline-flex bg-white text-orange-900 px-6 py-2 rounded-full font-bold w-max">Przejdź do warsztatów →</span>
                     </div>
