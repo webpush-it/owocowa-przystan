@@ -3,6 +3,7 @@ import { gallery } from './gallery'
 import { contact } from './contact'
 import { post } from './post'
 import { fruit } from './fruit'
+import { party } from './party'
 
 export const schemaTypes = [
     workshop,
@@ -10,4 +11,5 @@ export const schemaTypes = [
     contact,
     post,
     fruit,
+    party,
 ]

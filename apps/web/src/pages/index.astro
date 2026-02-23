@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets'
 import heroImg from '../assets/sad_glowne.jpg'
-import workshopImg from '../assets/sad_zajecia.jpg'
-import workshop2Img from '../assets/sad_zajecia2.jpg'
+import aboutUsImg from '../assets/sad_owoce.jpg'
+import aboutUs2Img from '../assets/sad_warsztaty.jpg'
 import { sanityClient, urlFor } from '../lib/sanity';
 
 import Layout from '../layouts/Layout.astro'
@@ -58,8 +58,8 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
                 </p>
             </div>
             <div class="grid grid-cols-2 gap-4">
-                <Image src={workshopImg} alt="Warsztaty w sadzie" class="rounded-2xl shadow-md mt-8" />
-                <Image src={workshop2Img} alt="Warsztaty w sadzie" class="rounded-2xl shadow-md" />
+                <Image src={aboutUsImg} alt="Owoce sadu" class="rounded-2xl shadow-md mt-8" />
+                <Image src={aboutUs2Img} alt="Warsztaty w sadzie" class="rounded-2xl shadow-md" />
             </div>
         </div>
     </section>
