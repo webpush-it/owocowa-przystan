@@ -45,12 +45,6 @@ export const workshop = defineType({
             type: 'text',
         }),
         defineField({
-            name: 'schedule',
-            title: 'Harmonogram (punkty)',
-            type: 'array',
-            of: [{ type: 'string' }]
-        }),
-        defineField({
             name: 'additionalInfo',
             title: 'Dodatkowe uwagi',
             type: 'text'
