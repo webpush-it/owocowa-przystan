@@ -50,6 +50,14 @@ export const workshop = defineType({
             title: 'Dodatkowe uwagi',
             type: 'array',
             of: [{type: 'block'}],
-        })
+        }),
+        defineField({
+            name: 'leaflet',
+            title: 'Ulotka informacyjna (PDF)',
+            type: 'file',
+            options: {
+                accept: 'application/pdf'
+            }
+        }),
     ]
 })

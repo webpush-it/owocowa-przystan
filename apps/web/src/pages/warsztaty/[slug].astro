@@ -21,7 +21,10 @@ export async function getStaticPaths() {
 const { slug } = Astro.params
 
 // Pobranie pełnych danych
-const query = `*[_type == "workshop" && slug.current == $slug][0]`
+const query = `*[_type == "workshop" && slug.current == $slug][0]{
+    ...,
+    "leafletUrl": leaflet.asset->url
+}`
 let workshop = await sanityClient.fetch(query, { slug })
 
 // Konfiguracja komponentów dla treści (żeby zdjęcia w tekście działały)
@@ -61,22 +64,38 @@ const components = {
             </div>
 
             <div class="space-y-6 col-span-2">
-                <div class="bg-op-cream p-6 rounded-xl border border-op-green/30 col-span-1">
+                <div class="bg-op-cream p-6 rounded-xl border border-op-green/30 h-full flex flex-col justify-between">
+                    <div>
                     <h3 class="font-bold text-lg mb-4 border-b border-gray-200 pb-2">Szczegóły logistyczne</h3>
-                    <ul class="space-y-3 text-sm">
+                        <ul class="space-y-3 text-sm mb-6">
                         <li><strong>Czas:</strong> {workshop.duration}</li>
                         <li><strong>Grupa:</strong> {workshop.targetGroup}</li>
                         <li><strong>Liczebność:</strong> {workshop.groupSize}</li>
                     </ul>
                 </div>
+
+                    {workshop.leafletUrl && (
+                        <div class="border-t border-op-green/20 pt-6">
+                            <a
+                                href={workshop.leafletUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center justify-center bg-white border-2 border-op-green-dark text-op-green-dark px-6 py-3 rounded-xl font-bold hover:bg-op-green-dark hover:text-white transition-colors w-full sm:w-auto shadow-sm"
+                            >
+                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Pobierz ulotkę informacyjną
+                            </a>
+                        </div>
+                    )}
+                </div>
             </div>
 
             <div class="space-y-6 col-span-1">
-                <div class="bg-op-red text-white p-6 rounded-xl text-center">
+                <div class="bg-op-red text-white p-6 rounded-xl text-center h-full flex flex-col justify-center">
                     <h3 class="font-bold text-lg mb-2">Zarezerwuj termin</h3>
-                    <p class="text-sm mb-4 opacity-90">Zadzwoń lub napisz, aby ustalić szczegóły.</p>
-                    <a href="/kontakt" class="inline-block bg-white text-op-red px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition w-full">
-                        Kontakt
+                    <p class="text-sm mb-6 opacity-90">Zadzwoń lub napisz, aby ustalić szczegóły.</p>
+                    <a href="/kontakt" class="inline-block bg-white text-op-red px-6 py-3 rounded-full font-bold hover:bg-gray-100 transition w-full shadow-md">
+                        Skontaktuj się
                     </a>
                 </div>
             </div>
