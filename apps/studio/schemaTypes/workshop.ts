@@ -42,12 +42,14 @@ export const workshop = defineType({
         defineField({
             name: 'description',
             title: 'Opis i zakres tematyczny',
-            type: 'text',
+            type: 'array',
+            of: [{type: 'block'}],
         }),
         defineField({
             name: 'additionalInfo',
             title: 'Dodatkowe uwagi',
-            type: 'text'
+            type: 'array',
+            of: [{type: 'block'}],
         })
     ]
 })
