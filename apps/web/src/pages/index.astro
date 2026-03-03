@@ -25,8 +25,14 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
 
 <Layout title="Strona Główna">
     <section class="relative h-[80vh] flex items-center justify-center overflow-hidden">
+        <Image
+            src={heroImg}
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+        />
         <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/20 z-10 backdrop-blur-sm"></div>
-        <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg.src}');`}></div>
 
         <div class="relative z-20 text-center p-8 max-w-4xl mx-auto rounded-2xl">
             <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
