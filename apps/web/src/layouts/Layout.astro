@@ -3,8 +3,6 @@ import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
-import '@fontsource/merriweather'
-import '@fontsource/inter'
 
 interface Props {
     title: string
@@ -31,6 +29,11 @@ const imageUrl = new URL(image, siteUrl);
         <title>{title} | Owocowa Przystań</title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalURL} />
+
+        <link rel="preload" href="/fonts/inter-regular.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/merriweather-regular.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href="/fonts/merriweather-bold.woff2" as="font" type="font/woff2" crossorigin />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta property="og:type" content="website" />
@@ -59,3 +62,34 @@ const imageUrl = new URL(image, siteUrl);
         <SpeedInsights />
     </body>
 </html>
+
+<style is:global>
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url('/fonts/inter-regular.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url('/fonts/inter-bold.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Merriweather';
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+        src: url('/fonts/merriweather-regular.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Merriweather';
+        font-style: normal;
+        font-weight: 700;
+        font-display: block;
+        src: url('/fonts/merriweather-bold.woff2') format('woff2');
+    }
+</style>

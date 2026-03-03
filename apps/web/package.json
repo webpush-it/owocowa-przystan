@@ -15,8 +15,6 @@
     "@astrojs/sitemap": "^3.7.0",
     "@astrojs/tailwind": "^5.0.0",
     "@astrojs/vercel": "^9.0.4",
-    "@fontsource/inter": "^5.2.8",
-    "@fontsource/merriweather": "^5.2.11",
     "@sanity/astro": "^3.0.0",
     "@sanity/client": "^6.0.0",
     "@sanity/image-url": "^1.0.0",
