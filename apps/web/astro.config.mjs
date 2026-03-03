@@ -6,6 +6,7 @@ import vercel from '@astrojs/vercel'
 import sitemap from '@astrojs/sitemap'
 
 export default defineConfig({
+    site: 'https://owocowaprzystan.pl',
     adapter: vercel(),
     integrations: [
         tailwind(),
