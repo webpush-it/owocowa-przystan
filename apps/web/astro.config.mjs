@@ -12,7 +12,7 @@ export default defineConfig({
         tailwind(),
         react(),
         sitemap({
-            filter: (page) => page !== 'https://owocowaprzystan.pl/sukces'
+            filter: (page) => page !== 'https://owocowaprzystan.pl/sukces/'
         }),
         sanity({
             projectId: 'zcxx0aah',
