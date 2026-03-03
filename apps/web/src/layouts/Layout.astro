@@ -1,4 +1,6 @@
 ---
+import Analytics from '@vercel/analytics/astro'
+import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import '@fontsource/merriweather'
@@ -28,5 +30,7 @@ const { title, description = "Gospodarstwo sadowniczo-edukacyjne Owocowa Przysta
             <slot />
         </main>
         <Footer />
+        <Analytics/>
+        <SpeedInsights />
     </body>
 </html>
