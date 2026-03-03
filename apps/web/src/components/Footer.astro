@@ -72,9 +72,14 @@ const links = [
             </div>
         </div>
 
-        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs opacity-60">
-            <p>&copy; {currentYear} Owocowa Przystań. Wszelkie prawa zastrzeżone.</p>
-            <div class="mt-4 md:mt-0 space-x-4">
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+            <div class="flex flex-col md:flex-row items-center gap-1">
+                <p class="opacity-60">&copy; {currentYear} Owocowa Przystań. Wszelkie prawa zastrzeżone.</p>
+                <a href="/polityka-prywatnosci" class="opacity-60 hover:opacity-100 hover:text-white transition-all duration-300">
+                    Polityka Prywatności
+                </a>
+            </div>
+            <div class="mt-4 md:mt-0 opacity-60">
                 <span>Realizacja: WebPushIT</span>
             </div>
         </div>
