@@ -11,7 +11,9 @@ export default defineConfig({
     integrations: [
         tailwind(),
         react(),
-        sitemap(),
+        sitemap({
+            filter: (page) => page !== 'https://owocowaprzystan.pl/sukces'
+        }),
         sanity({
             projectId: 'zcxx0aah',
             dataset: 'production',
