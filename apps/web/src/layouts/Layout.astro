@@ -3,6 +3,7 @@ import Analytics from '@vercel/analytics/astro'
 import SpeedInsights from "@vercel/speed-insights/astro"
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
+import CookieBanner from '../components/CookieBanner.astro'
 
 interface Props {
     title: string
@@ -51,6 +52,29 @@ const imageUrl = new URL(image, siteUrl);
         <!--<meta name="twitter:image" content={imageUrl} />-->
 
         <meta name="generator" content={Astro.generator} />
+
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+
+            // Ustawienie DOMYŚLNEJ odmowy (RODO wymaga, by domyślnie nic nie śledzić)
+            gtag('consent', 'default', {
+                'analytics_storage': 'denied',
+                'ad_storage': 'denied',
+                'ad_user_data': 'denied',
+                'ad_personalization': 'denied',
+                'wait_for_update': 500
+            });
+
+            // Ładowanie skryptu Google
+            const script = document.createElement('script');
+            script.async = true;
+            script.src = 'https://www.googletagmanager.com/gtag/js?id=G-P4JV1190HX';
+            document.head.appendChild(script);
+
+            gtag('js', new Date());
+            gtag('config', 'G-P4JV1190HX');
+        </script>
     </head>
     <body class="bg-op-cream text-op-brown font-sans antialiased selection:bg-op-red selection:text-white">
         <Navbar />
@@ -58,6 +82,9 @@ const imageUrl = new URL(image, siteUrl);
             <slot />
         </main>
         <Footer />
+
+        <CookieBanner />
+
         <Analytics/>
         <SpeedInsights />
     </body>
