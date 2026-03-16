@@ -3,24 +3,24 @@ import { Image } from 'astro:assets'
 import heroImg from '../assets/sad_glowne.jpg'
 import aboutUsImg from '../assets/sad_owoce.jpg'
 import aboutUs2Img from '../assets/sad_warsztaty.jpg'
-import { sanityClient, urlFor } from '../lib/sanity';
+import { sanityClient, urlFor } from '../lib/sanity'
 
 import Layout from '../layouts/Layout.astro'
 
-// Przykładowe dane "statyczne" do szybkiego startu, zanim backend zostanie uzupełniony
+// Przykładowe dane statyczne do szybkiego startu, zanim backend zostanie uzupełniony.
 const features = [
-    { title: "Edukacja", desc: "Warsztaty przyrodnicze dla dzieci i dorosłych", icon: "📚" },
-    { title: "Natura", desc: "Tutaj dzieje się magia! Cisza, spokój i oddanie.", icon: "🌳" },
-    { title: "Tradycja", desc: "Od 1945 roku z pasją, szczerością i zaangażowaniem", icon: "🍎" },
+    { title: 'Edukacja', desc: 'Warsztaty przyrodnicze dla dzieci i dorosłych', icon: '📚' },
+    { title: 'Natura', desc: 'Tutaj dzieje się magia. Cisza, spokój i oddanie.', icon: '🌳' },
+    { title: 'Tradycja', desc: 'Od 1945 roku z pasją, szczerością i zaangażowaniem', icon: '🍎' }
 ]
 
-// Pobieramy tylko 3 najnowsze posty
+// Pobieramy tylko 3 najnowsze posty.
 const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publishedAt desc)[0..2] {
   title,
   slug,
   publishedAt,
   mainImage
-}`);
+}`)
 ---
 
 <Layout title="Strona Główna">
@@ -36,7 +36,7 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
 
         <div class="relative z-20 text-center p-8 max-w-4xl mx-auto rounded-2xl">
             <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
-                Odkryj magię <br/> <span class="text-op-green">Owocowej Przystani</span>
+                Odkryj magię <br /> <span class="text-op-green">Owocowej Przystani</span>
             </h1>
             <p class="text-lg md:text-xl text-gray-100 mb-8 max-w-3xl mx-auto">
                 Gospodarstwo sadowniczo-edukacyjne, gdzie natura spotyka się z nauką.
@@ -73,7 +73,7 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
     <section class="bg-white py-20">
         <div class="container mx-auto px-8">
             <div class="grid md:grid-cols-3 gap-8">
-                {features.map(f => (
+                {features.map((f) => (
                     <div class="text-center p-8 rounded-2xl bg-op-cream border border-gray-100 hover:shadow-lg transition">
                         <div class="text-5xl mb-4">{f.icon}</div>
                         <h3 class="font-serif text-xl font-bold mb-2">{f.title}</h3>
@@ -86,7 +86,6 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
 
     <section class="py-20 bg-white border-t border-stone-100">
         <div class="container mx-auto px-4">
-
             <div class="flex justify-between items-end mb-12">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-serif font-bold text-stone-800 mb-2">
@@ -101,29 +100,29 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {recentPosts.map((post) => (
-                        <a href={`/blog/${post.slug.current}`} class="group block">
-                            <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-4">
-                                {post.mainImage ? (
-                                        <img
-                                                src={urlFor(post.mainImage).width(600).height(450).url()}
-                                                alt={post.title}
-                                                class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
-                                        />
-                                ) : (
-                                        <div class="w-full h-full bg-stone-100 flex items-center justify-center text-stone-300">
-                                            Brak zdjęcia
-                                        </div>
-                                )}
-                                <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-                            </div>
+                    <a href={`/blog/${post.slug.current}`} class="group block">
+                        <div class="relative overflow-hidden rounded-xl aspect-[4/3] mb-4">
+                            {post.mainImage ? (
+                                <img
+                                    src={urlFor(post.mainImage).width(600).height(450).url()}
+                                    alt={post.title}
+                                    class="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500"
+                                />
+                            ) : (
+                                <div class="w-full h-full bg-stone-100 flex items-center justify-center text-stone-300">
+                                    Brak zdjęcia
+                                </div>
+                            )}
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
+                        </div>
 
-                            <div class="text-sm text-green-600 mb-2">
-                                {new Date(post.publishedAt).toLocaleDateString('pl-PL')}
-                            </div>
-                            <h3 class="text-xl font-bold text-stone-800 group-hover:text-green-700 transition-colors leading-tight">
-                                {post.title}
-                            </h3>
-                        </a>
+                        <div class="text-sm text-green-600 mb-2">
+                            {new Date(post.publishedAt).toLocaleDateString('pl-PL')}
+                        </div>
+                        <h3 class="text-xl font-bold text-stone-800 group-hover:text-green-700 transition-colors leading-tight">
+                            {post.title}
+                        </h3>
+                    </a>
                 ))}
             </div>
 
@@ -132,7 +131,6 @@ const recentPosts = await sanityClient.fetch(`*[_type == "post"] | order(publish
                     Zobacz wszystkie wpisy
                 </a>
             </div>
-
         </div>
     </section>
 </Layout>

@@ -1,12 +1,13 @@
 ---
 import { Image } from 'astro:assets'
 import logo from '../assets/owocowa-przystan-logo.png'
+
 const links = [
     { name: 'O nas', href: '/#o-nas' },
     { name: 'Oferta', href: '/oferta' },
     { name: 'Galeria', href: '/galeria' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Kontakt', href: '/kontakt' },
+    { name: 'Kontakt', href: '/kontakt' }
 ]
 ---
 
@@ -23,7 +24,7 @@ const links = [
         </a>
 
         <ul class="hidden md:flex gap-8">
-            {links.map(link => (
+            {links.map((link) => (
                 <li>
                     <a href={link.href} class="text-op-brown hover:text-op-red font-medium transition-colors">
                         {link.name}
@@ -44,7 +45,7 @@ const links = [
 
     <div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-white border-b border-op-green/20 shadow-xl">
         <ul class="flex flex-col p-6 gap-4 text-center">
-            {links.map(link => (
+            {links.map((link) => (
                 <li>
                     <a
                         href={link.href}
@@ -59,25 +60,23 @@ const links = [
 </nav>
 
 <script>
-    // Pobieramy elementy po ID
+    // Pobieramy elementy po ID.
     const menuBtn = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
     const iconOpen = document.getElementById('icon-open');
     const iconClose = document.getElementById('icon-close');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    // Funkcja przełączająca menu
+    // Funkcja przełączająca menu.
     function toggleMenu() {
         const isClosed = mobileMenu.classList.contains('hidden');
 
         if (isClosed) {
-            // Otwórz
             mobileMenu.classList.remove('hidden');
             iconOpen.classList.add('hidden');
             iconClose.classList.remove('hidden');
-            iconClose.classList.remove('rotate-90'); // Animacja obrotu X
+            iconClose.classList.remove('rotate-90');
         } else {
-            // Zamknij
             mobileMenu.classList.add('hidden');
             iconOpen.classList.remove('hidden');
             iconClose.classList.add('hidden');
@@ -85,16 +84,14 @@ const links = [
         }
     }
 
-    // Obsługa kliknięcia w przycisk
     menuBtn?.addEventListener('click', toggleMenu);
 
-    // Zamknij menu po kliknięciu w którykolwiek link (ważne przy nawigacji na tej samej stronie)
-    mobileLinks.forEach(link => {
+    // Zamknij menu po kliknięciu w dowolny link.
+    mobileLinks.forEach((link) => {
         link.addEventListener('click', () => {
-             // Wymuś zamknięcie
-             mobileMenu.classList.add('hidden');
-             iconOpen.classList.remove('hidden');
-             iconClose.classList.add('hidden');
+            mobileMenu.classList.add('hidden');
+            iconOpen.classList.remove('hidden');
+            iconClose.classList.add('hidden');
         });
     });
 </script>

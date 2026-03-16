@@ -27,8 +27,8 @@
     // Funkcja aktualizująca zgodę w Google
     function updateConsent(isAccepted) {
         window.gtag('consent', 'update', {
-            'analytics_storage': isAccepted ? 'granted' : 'denied',
-            'ad_storage': isAccepted ? 'granted' : 'denied'
+            analytics_storage: isAccepted ? 'granted' : 'denied',
+            ad_storage: isAccepted ? 'granted' : 'denied'
         });
         localStorage.setItem('cookie-consent', isAccepted ? 'accepted' : 'rejected');
         hideBanner();
@@ -47,8 +47,8 @@
     } else if (consent === 'accepted') {
         // Jeśli wcześniej zaakceptował, odblokuj Google
         window.gtag('consent', 'update', {
-            'analytics_storage': 'granted',
-            'ad_storage': 'granted'
+            analytics_storage: 'granted',
+            ad_storage: 'granted'
         });
     }
 

@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets'
 import logo from '../assets/owocowa-przystan-logo.png'
 
-const currentYear = new Date().getFullYear();
+const currentYear = new Date().getFullYear()
 
 const links = [
     { name: 'Strona Główna', href: '/' },
@@ -10,14 +10,13 @@ const links = [
     { name: 'Oferta', href: '/oferta' },
     { name: 'Galeria', href: '/galeria' },
     { name: 'Blog', href: '/blog' },
-    { name: 'Kontakt', href: '/kontakt' },
-];
+    { name: 'Kontakt', href: '/kontakt' }
+]
 ---
 
 <footer class="bg-op-brown text-op-cream pt-16 pb-8 border-t border-op-green/30">
     <div class="container mx-auto px-8">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-
             <div class="space-y-4">
                 <a href="/" class="flex items-center gap-2 group">
                     <Image src={logo} alt="Owocowa Przystań Logo" class="h-20 w-auto" />
@@ -39,7 +38,7 @@ const links = [
             <div>
                 <h3 class="font-bold text-lg text-white mb-4 font-serif">Nawigacja</h3>
                 <ul class="flex flex-wrap">
-                    {links.map(link => (
+                    {links.map((link) => (
                         <li class="pr-8">
                             <a href={link.href} class="text-sm opacity-80 hover:opacity-100 hover:text-op-green transition-colors">
                                 {link.name}
@@ -54,7 +53,7 @@ const links = [
                 <ul class="space-y-3 text-sm opacity-80">
                     <li class="flex items-start gap-3">
                         <span class="text-op-green">📍</span>
-                        <span>Borowno-Kolonia<br/>ul. Klonowa 43<br/>42-233 Mykanów</span>
+                        <span>Borowno-Kolonia<br />ul. Klonowa 43<br />42-233 Mykanów</span>
                     </li>
                     <li class="flex items-center gap-3">
                         <span class="text-op-green">📞</span>

@@ -1,6 +1,6 @@
 ---
 import Analytics from '@vercel/analytics/astro'
-import SpeedInsights from "@vercel/speed-insights/astro"
+import SpeedInsights from '@vercel/speed-insights/astro'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import CookieBanner from '../components/CookieBanner.astro'
@@ -13,12 +13,12 @@ interface Props {
 
 const {
     title,
-    description = "Gospodarstwo sadowniczo-edukacyjne Owocowa Przystań. Warsztaty dla dzieci, natura i ekologia.",
-    image = "/og-image.jpg"
+    description = 'Gospodarstwo sadowniczo-edukacyjne Owocowa Przystań. Warsztaty dla dzieci, natura i ekologia.',
+    image = '/og-image.jpg'
 } = Astro.props
-const siteUrl = Astro.site || 'https://owocowaprzystan.pl';
-const canonicalURL = new URL(Astro.url.pathname, siteUrl);
-const imageUrl = new URL(image, siteUrl);
+const siteUrl = Astro.site || 'https://owocowaprzystan.pl'
+const canonicalURL = new URL(Astro.url.pathname, siteUrl)
+const imageUrl = new URL(image, siteUrl)
 ---
 
 <!doctype html>
@@ -36,7 +36,7 @@ const imageUrl = new URL(image, siteUrl);
         <link rel="preload" href="/fonts/inter-bold.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="preload" href="/fonts/merriweather-bold.woff2" as="font" type="font/woff2" crossorigin />
 
-        <link rel="icon" type="image/png" href="/favicon.png">
+        <link rel="icon" type="image/png" href="/favicon.png" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:title" content={title} />
@@ -55,18 +55,20 @@ const imageUrl = new URL(image, siteUrl);
 
         <script is:inline>
             window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
+            function gtag() {
+                dataLayer.push(arguments);
+            }
 
-            // Ustawienie DOMYŚLNEJ odmowy (RODO wymaga, by domyślnie nic nie śledzić)
+            // Ustawienie domyślnej odmowy, aby nic nie śledzić bez zgody.
             gtag('consent', 'default', {
-                'analytics_storage': 'denied',
-                'ad_storage': 'denied',
-                'ad_user_data': 'denied',
-                'ad_personalization': 'denied',
-                'wait_for_update': 500
+                analytics_storage: 'denied',
+                ad_storage: 'denied',
+                ad_user_data: 'denied',
+                ad_personalization: 'denied',
+                wait_for_update: 500
             });
 
-            // Ładowanie skryptu Google
+            // Ładowanie skryptu Google.
             const script = document.createElement('script');
             script.async = true;
             script.src = 'https://www.googletagmanager.com/gtag/js?id=G-P4JV1190HX';
@@ -85,7 +87,7 @@ const imageUrl = new URL(image, siteUrl);
 
         <CookieBanner />
 
-        <Analytics/>
+        <Analytics />
         <SpeedInsights />
     </body>
 </html>
@@ -98,6 +100,7 @@ const imageUrl = new URL(image, siteUrl);
         font-display: block;
         src: url('/fonts/inter-regular.woff2') format('woff2');
     }
+
     @font-face {
         font-family: 'Inter';
         font-style: normal;
@@ -105,6 +108,7 @@ const imageUrl = new URL(image, siteUrl);
         font-display: block;
         src: url('/fonts/inter-bold.woff2') format('woff2');
     }
+
     @font-face {
         font-family: 'Merriweather';
         font-style: normal;
@@ -112,6 +116,7 @@ const imageUrl = new URL(image, siteUrl);
         font-display: block;
         src: url('/fonts/merriweather-regular.woff2') format('woff2');
     }
+
     @font-face {
         font-family: 'Merriweather';
         font-style: normal;
